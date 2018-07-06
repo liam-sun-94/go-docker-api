@@ -11,32 +11,32 @@
 > http://localhost:8080/apidoc
 
 post的数据格式
-{
-"8":{ 
-        "name":"第8题", 
-        "type":"选择题", 
-        "problem":"1+1=？", 
-        "answer":"A.1&B.2&C.3&D.4@A", 
-        "createTime":"2018-7-6 16:34", 
-        "author":"slq"
-   },
-"9":{ 
-        "name":"第9题", 
-        "type":"选择题", 
-        "problem":"1+1=？", 
-        "answer":"A.1&B.2&C.3&D.4@A", 
-        "createTime":"2018-7-6 16:34", 
-        "author":"slq"
-   },
-"10":{ 
-        "name":"第10题", 
-        "type":"选择题", 
-        "problem":"1+1=？", 
-        "answer":"A.1&B.2&C.3&D.4@A", 
-        "createTime":"2018-7-6 16:34", 
-        "author":"slq"
-   }             
-} 
+> {
+> "8":{ 
+>         "name":"第8题", 
+>         "type":"选择题", 
+>         "problem":"1+1=？", 
+>         "answer":"A.1&B.2&C.3&D.4@A", 
+>         "createTime":"2018-7-6 16:34", 
+>         "author":"slq"
+>    },
+> "9":{ 
+>        "name":"第9题", 
+>         "type":"选择题", 
+>         "problem":"1+1=？", 
+>         "answer":"A.1&B.2&C.3&D.4@A", 
+>         "createTime":"2018-7-6 16:34", 
+>         "author":"slq"
+>    },
+> "10":{ 
+>         "name":"第10题", 
+>         "type":"选择题", 
+>         "problem":"1+1=？", 
+>         "answer":"A.1&B.2&C.3&D.4@A", 
+>         "createTime":"2018-7-6 16:34", 
+>         "author":"slq"
+>    }             
+> } 
 
 get 的id值为数字
 例： 8 
