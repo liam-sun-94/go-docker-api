@@ -2,9 +2,13 @@ package main
 
 import (
 	"github.com/henrylee2cn/faygo"
-	"fmt"
 	"go-restfulDocker/db"
 	"encoding/json"
+	"strconv"
+
+	_ "github.com/denisenkom/go-mssqldb"
+	"fmt"
+	"go-restfulDocker/docker"
 )
 //GET
 type testGet struct {
@@ -19,34 +23,25 @@ type testGet struct {
 type testPost struct {
 	Data map[string]interface{} 	`param:"<in:body>"`
 }
-//Delete
+//PUT
 type testPut struct {
-	Data string	`param:"<in:query>"`
+	Id string `param:"<in:query> <required>"`
 }
 //Delete
 type testDelete struct {
-	Data string	`param:"<in:query>"`
+	Id string `param:"<in:query> <required>"` // <desc:ID>
 }
 
 
 //GET实现
 func (i *testGet) Serve(ctx *faygo.Context) error {
-	//if ctx.CookieParam("faygoID") == "" {
-	//	ctx.SetCookie("faygoID", time.Now().String())
-	//}
 	result := db.Get("/db/database", i.Id)
 	return ctx.String(200, result)
 	//return ctx.JSON(200, i)
 }
 //POST实现
 func(p *testPost) Serve(ctx *faygo.Context) error{
-	//if ctx.CookieParam("faygoID") == "" {
-	//	ctx.SetCookie("faygoID", time.Now().String())
-	//}
-	//t := p.Data["1"]
-	//fmt.Println(t["name"])
-	//fmt.Println(ctx.JSON(200,p))
-
+	//将数据存储进levelDB
 	for problemId, problem := range p.Data{
 		value, err1 :=problem.(map[string]interface{})
 		if !err1 {
@@ -54,12 +49,28 @@ func(p *testPost) Serve(ctx *faygo.Context) error{
 		}
 		mjson,_ :=json.Marshal(value)
 		mString :=string(mjson)
-		result, err := db.Save("/db/database", problemId, mString)
+
+		fmt.Println(p.Data)
+		result, err := db.Save("src/user1/dockerSrc/DB", problemId, mString)
 
 		if err != nil{
 			return ctx.String(200,  problemId + result + "：" + err.Error())
 		}
 	}
+
+	//编写Dockerfile
+	db.CreateDockerFile("src/user1/dockerSrc/Dockerfile", "temp")
+
+	//生成tar包
+	db.CreateTarfile("src/user1/srcTar/test.tar", "src/user1/dockerSrc")
+
+	//imagesbuild
+	docker.BuildImage("test:v1", "src/user1/srcTar/test.tar")
+
+	//将镜像保存成tar文件
+	//docker.SaveImage("", "")
+
+	//返回可供下载dockeriamge.tar的地址
 	return ctx.String(200, "ok")
 }
 //PUT实现
@@ -67,16 +78,30 @@ func(p *testPut) Serve(ctx *faygo.Context) error{
 	//if ctx.CookieParam("faygoID") == "" {
 	//	ctx.SetCookie("faygoID", time.Now().String())
 	//}
-	fmt.Println(p.Data)
-	fmt.Println(ctx.JSON(200,p))
-	return ctx.JSON(200,p)
+	//for problemId, value := range p.Data {
+	//	setValue, err1 := value.(map[string]interface{})
+	//	if !err1 {
+	//		return ctx.String(200, "数据格式有误")
+	//	}
+	//	mjson,_ :=json.Marshal(setValue)
+	//	mString :=string(mjson)
+	//	err := db.Put("/db/database", problemId, mString)
+	//	if !err {
+	//		return ctx.String(200, problemId+"更改错误")
+	//	}
+	//}
+	result := db.Put("/db/database", p.Id )
+
+	return ctx.String(200,  strconv.FormatBool(result) )
+	//return ctx.JSON(200,p)
 }
 //DELETE实现
 func (i *testDelete) Serve(ctx *faygo.Context) error {
 	//if ctx.CookieParam("faygoID") == "" {
 	//	ctx.SetCookie("faygoID", time.Now().String())
 	//}
-	return ctx.String(200, "这是Delete请求！！！" + i.Data)
+	result := db.Delete("/db/database", i.Id)
+	return ctx.String(200, strconv.FormatBool(result))
 	//return ctx.JSON(200, i)
 }
 
@@ -151,6 +176,8 @@ func (a *testDelete) Doc() faygo.Doc {
 
 }
 
+
+
 func main() {
 
 	//testDb()
@@ -172,7 +199,8 @@ func main() {
 	// )
 	//**
 
-	 //*/
+
+	//test connect sql server 2008
 
 
 	// Start the service
