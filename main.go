@@ -2,13 +2,13 @@ package main
 
 import (
 	"github.com/henrylee2cn/faygo"
-	"go-restfulDocker/db"
+	"go-resetfulDocker/db"
 	"encoding/json"
 	"strconv"
 
 	_ "github.com/denisenkom/go-mssqldb"
 	"fmt"
-	"go-restfulDocker/docker"
+	"go-resetfulDocker/docker"
 )
 //GET
 type testGet struct {
@@ -35,7 +35,11 @@ type testDelete struct {
 
 //GET实现
 func (i *testGet) Serve(ctx *faygo.Context) error {
-	result := db.Get("/db/database", i.Id)
+
+	//test ImageList
+	docker.GetAll()
+
+	result := db.Get("src/user1/dockerSrc/DB", i.Id)
 	return ctx.String(200, result)
 	//return ctx.JSON(200, i)
 }
@@ -68,10 +72,14 @@ func(p *testPost) Serve(ctx *faygo.Context) error{
 	docker.BuildImage("test:v1", "src/user1/srcTar/test.tar")
 
 	//将镜像保存成tar文件
-	//docker.SaveImage("", "")
+	//docker.SaveImage(name, path)
+	err := docker.SaveImage("test:v1", "src/imageTar/temp.tar")
+	if err != nil{
+		return ctx.String(200, err.Error())
+	}
 
 	//返回可供下载dockeriamge.tar的地址
-	return ctx.String(200, "ok")
+	return ctx.String(200, "localhost:8080/imageTar/temp.tar")
 }
 //PUT实现
 func(p *testPut) Serve(ctx *faygo.Context) error{
@@ -199,6 +207,10 @@ func main() {
 	// )
 	//**
 
+	//静态路由
+	app.Route(
+		app.NewStatic("imageTar", "src/imageTar"),
+	)
 
 	//test connect sql server 2008
 
