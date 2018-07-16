@@ -33,6 +33,7 @@ func BuildImage(name string, tarPath string) error{
 	}
 
 	BuildContext, err := os.Open(tarPath)
+	fmt.Println(tarPath)
 
 	buildResponse, err := cli.ImageBuild(ctx, BuildContext, options)
 
@@ -41,9 +42,9 @@ func BuildImage(name string, tarPath string) error{
 		return err
 	}
 
-	//fmt.Println(buildResponse)
-	//fmt.Println(buildResponse.OSType)
-	//fmt.Println(buildResponse.Body)
+	fmt.Println(buildResponse)
+	fmt.Println(buildResponse.OSType)
+	fmt.Println(buildResponse.Body)
 	////buildResponse.Body
 	//fmt.Println(buildResponse.Body)
 
@@ -94,7 +95,7 @@ func GetAll(){
 *
  */
 func SaveImage(name string, path string) error{
-
+	fmt.Println("save")
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts()
 	if err != nil{

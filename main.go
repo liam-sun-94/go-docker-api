@@ -37,7 +37,7 @@ type testDelete struct {
 func (i *testGet) Serve(ctx *faygo.Context) error {
 
 	//test ImageList
-	docker.GetAll()
+	//docker.GetAll()
 
 	result := db.Get("src/user1/dockerSrc/DB", i.Id)
 	return ctx.String(200, result)
@@ -64,19 +64,23 @@ func(p *testPost) Serve(ctx *faygo.Context) error{
 
 	//编写Dockerfile
 	db.CreateDockerFile("src/user1/dockerSrc/Dockerfile", "temp")
+	fmt.Println("Dockerfile end")
 
 	//生成tar包
-	db.CreateTarfile("src/user1/srcTar/test.tar", "src/user1/dockerSrc")
+	db.CreateTarfile("src/user1/srcTar/temp.tar", "src/user1/dockerSrc")
+	fmt.Println("tar end")
 
 	//imagesbuild
-	docker.BuildImage("test:v1", "src/user1/srcTar/test.tar")
+	docker.BuildImage("ttt:ttt", "src/user1/srcTar/temp.tar")
+	fmt.Println("imagesbuild end")
 
 	//将镜像保存成tar文件
 	//docker.SaveImage(name, path)
-	err := docker.SaveImage("test:v1", "src/imageTar/temp.tar")
+	err := docker.SaveImage("ttt:ttt", "src/imageTar/temp.tar")
 	if err != nil{
 		return ctx.String(200, err.Error())
 	}
+	fmt.Println("SaveImage end")
 
 	//返回可供下载dockeriamge.tar的地址
 	return ctx.String(200, "localhost:8080/imageTar/temp.tar")
@@ -188,8 +192,6 @@ func (a *testDelete) Doc() faygo.Doc {
 
 func main() {
 
-	//testDb()
-
 	app := faygo.New("myapp", "0.1")
 
 	// Register the route in a chain style
@@ -199,20 +201,11 @@ func main() {
 	app.PUT("/index", new(testPut))
 
 
-
-
 	// Register the route in a tree style
-	// app.Route(
-	//     app.NewGET("/index/:id", new(Index)),
-	// )
-	//**
-
-	//静态路由
 	app.Route(
+		//静态路由
 		app.NewStatic("imageTar", "src/imageTar"),
 	)
-
-	//test connect sql server 2008
 
 
 	// Start the service
