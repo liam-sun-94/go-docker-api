@@ -5,8 +5,6 @@ import (
 	"github.com/syndtr/goleveldb/leveldb"
 	"strconv"
 	"encoding/json"
-	"os"
-	"go-resetfulDocker/cmd"
 )
 
 type Problem struct{
@@ -201,71 +199,3 @@ func Put(path string, key string) bool{
 }
 
 
-/**
-*  	临时的Dockerfile文件方法
-*
-*/
-func CreateDockerFile(path string, test string){
-	f, err := os.Create(path)
-	if err != nil {
-		panic(err)
-	}
-
-	defer f.Close()
-
-	str1 := "FROM alpine \n" +
-	"COPY sgerrand.rsa.pub /etc/apk/keys/sgerrand.rsa.pub \n" +
-	"COPY glibc-2.27-r0.apk /  \n" +
-	"RUN  apk add glibc-2.27-r0.apk \n" +
-	"COPY DB /usr/local/go/go-contianerAPI/DB  \n" +
-	"COPY go-containerAPI /usr/local/go/go-contianerAPI/go-containerAPI   \n" +
-	`CMD ["/bin/sh", "-c", "/usr/local/go/go-contianerAPI/go-containerAPI"]`
-	//"RUN /usr/local/go/go-contianerAPI/go-containerAPI \n"
-	//str1 := "FROM centos \n RUN ifconfig \n CMD \n" + test
-	//buffStr := []byte(str1)
-	//re, err := f.Write(buffStr)
-
-	re, err := f.WriteString(str1)
-	if err != nil {
-		panic(err)
-	}
-	fmt.Println(re)
-	fmt.Println(test)
-	//d2 := []byte{115, 111, 109, 101, 10}
-	//n2, err := f.Write(d2)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Printf("wrote %d bytes\n", n2)
-	//
-	//n3, err := f.WriteString("writes\n")
-	//fmt.Printf("wrote %d bytes\n", n3)
-	//
-	//
-	//f.Sync()
-	//
-	//
-	//w := bufio.NewWriter(f)
-	//n4, err := w.WriteString("buffered\n")
-	//fmt.Printf("wrote %d bytes\n", n4)
-	//
-	//
-	//str1 := "FROM centos \n RUN ifconfig \n CMD"
-	//buffStr := []byte(str1)
-	//n5, err := f.Write(buffStr)
-	//if err != nil {
-	//	panic(err)
-	//}
-	//fmt.Println(n5)
-	//
-	//w.Flush()
-
-}
-
-func CreateTarfile(pathT string, pathF string){
-	//"test/test1.tar"
-	//"/home/alex/go/src/test_cli/go_docker_api"
-	fmt.Println(pathT)
-	re := cmd.Lcmd("tar", []string{"-cvf", pathT, "-C", pathF,"."})
-	fmt.Println(re)
-}

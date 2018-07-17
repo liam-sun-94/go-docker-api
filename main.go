@@ -5,10 +5,10 @@ import (
 	"go-resetfulDocker/db"
 	"encoding/json"
 	"strconv"
-
 	_ "github.com/denisenkom/go-mssqldb"
 	"fmt"
 	"go-resetfulDocker/docker"
+	"go-resetfulDocker/file"
 )
 //GET
 type testGet struct {
@@ -45,7 +45,9 @@ func (i *testGet) Serve(ctx *faygo.Context) error {
 }
 //POST实现
 func(p *testPost) Serve(ctx *faygo.Context) error{
+
 	//将数据存储进levelDB
+	//对收到的数据进行解读
 	for problemId, problem := range p.Data{
 		value, err1 :=problem.(map[string]interface{})
 		if !err1 {
@@ -63,15 +65,15 @@ func(p *testPost) Serve(ctx *faygo.Context) error{
 	}
 
 	//编写Dockerfile
-	db.CreateDockerFile("src/user1/dockerSrc/Dockerfile", "temp")
+	file.CreateDockerFile("src/user2/dockerSrc/Dockerfile", "temp")
 	fmt.Println("Dockerfile end")
 
 	//生成tar包
-	db.CreateTarfile("src/user1/srcTar/temp.tar", "src/user1/dockerSrc")
+	file.CreateTarfile("src/user2/srcTar/temp.tar", "src/user2/dockerSrc")
 	fmt.Println("tar end")
 
 	//imagesbuild
-	docker.BuildImage("ttt:ttt", "src/user1/srcTar/temp.tar")
+	docker.BuildImage("ttt:ttt", "src/user2/srcTar/temp.tar")
 	fmt.Println("imagesbuild end")
 
 	//将镜像保存成tar文件
