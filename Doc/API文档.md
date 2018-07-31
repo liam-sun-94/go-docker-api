@@ -6,7 +6,7 @@ type:POST
 参数：body中json格式
 参数示例：
 
->```
+> ```
 {
 "uid":"user1",
 "imgName":"img-test",
@@ -30,6 +30,7 @@ type:POST
     }
 }}
 ```
+
 返回值：string（无错误返回：“BuildImage”）
 
 
@@ -51,7 +52,8 @@ type:GET
 
 返回值：json
 返回值示例：此版返回信息较多，后期可以根据需求返回数据
->```
+
+> ```
 [
   {
     "Id": "725a6ee9a490cbdf02249ee0fbdd92bc2c3c29fa04b59c8631419d195eda97d2",
@@ -153,7 +155,8 @@ type:GET
 
 返回值：json
 返回值示例：本版返回信息较多，后期可根据去求返回数据
->```
+
+> ```
 {
   "Id": "6fb453556811708c9ca162de467871cbb72cc787eb09e81f79cc0d713585d90c",
   "Created": "2018-07-30T08:42:32.704881503Z",
@@ -373,7 +376,8 @@ type:GET
 
 返回值：json
 返回值示例：“buildContainer” （正确创建的返回值）
->```
+
+> ```
 {
   "Code": 0,
   "Msg": "",
