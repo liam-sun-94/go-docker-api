@@ -1,0 +1,154 @@
+*{
+	margin:0;
+	padding: 0;
+}
+body{
+	width:100%;
+	height:100%;
+}
+a{
+	text-decoration: none;
+}
+
+/*导航头*/
+.header{
+	width:100%;
+	height:45px;
+	background-color:#222;
+	min-width: 960px;
+	position: fixed;
+	z-index:9999;
+}
+.logo{
+	float:left;
+	/*height:50px;*/
+	padding-top: 10px;
+	padding-left: 55px;
+}
+.logo-text{
+	color:white;
+	font-size: 18px;
+	display: block;
+	float: left;
+}
+.logo-img{
+	float:left;
+	margin-right: 5px;;
+}
+.logo-ul{
+	width: 100px;
+    color: white;
+    float: right;
+    line-height: 45px;
+    overflow: hidden;
+    position: relative;
+}
+.logo-ul-a{
+	color: white;
+	line-height: 45px;
+	display: block;
+	margin-left: 5px;
+}
+.logo-ul-a:hover{
+	color: white;
+}
+.logo-ul-line{
+	/*display: none;*/
+	position: absolute;
+	right: 105px;
+	top: 40px;
+	width: 72px;
+	opacity: 1;
+	height: 5px;
+	background-color: #5FB878;
+	transition: all .2s;
+	-webkit-transition: all .2s;
+}
+
+/*左侧菜单*/
+.left-nav{
+	background-color:#EEEEEE;
+	width:229px;
+	min-height:100%;
+	position: fixed;
+	color:#363636;
+	overflow: hidden;
+	z-index:9998;
+	margin-top:45px;
+	border-right: 1px solid #e5e5e5;
+}
+.menu-btn{
+	height:34px;
+	width: 230px;
+	line-height: 34px;
+	text-align: center;
+	font-size: 20px;
+	overflow: hidden;
+	/*border-bottom: 1px solid #C0C0C0;*/
+	border-bottom: 1px solid #d3d3d3;
+}
+.menu-btn a{
+	display: block;
+	line-height: 34px;
+	color: #363636;
+	
+}
+.sidebar-menu{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+
+}
+.treeview{
+	position: relative;
+	list-style: none;
+	/*height:40px;*/
+	text-align:center;
+	/*border-bottom: 1px solid #C0C0C0;*/
+	/*border-bottom: 1px solid #e5e5e5;*/
+	border-bottom: 1px solid #d3d3d3;
+	background:#EEEEEE;
+	display: block;
+	width:230px; 
+}
+.treeview-menu{
+	list-style: none;
+	position: relative;
+	background:#DAD9D9;
+	 
+}
+.treeview a{
+	line-height: 40px;
+	color:#363636;
+	font-size: 16px; 
+	position: relative;
+	display: block;
+	width:232px;
+}
+.treeview-flag{
+	font-size:16px;
+	float: left;
+	line-height: 40px;
+	left: 50px;  
+	position: relative;
+}
+.treeview-menu a:hover{
+	color:#FFFFFF;
+	background: #C0C0C0;
+}
+.at-right{
+	float:right;
+	line-height: 40px!important;
+	margin-right: 5px;
+	width:10px;
+	height:10px;
+}
+
+/*公用*/
+.display-none{
+	display: none;
+}
+.display-block{
+	display:block;
+}
