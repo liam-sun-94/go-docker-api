@@ -1,4 +1,4 @@
-# go-restfulldocker API v1.0
+# go-docker-api  API v1.0
 
 #### api: /BuildImage
 type:POST
