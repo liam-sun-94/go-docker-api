@@ -6,30 +6,28 @@ type:POST
 参数：body中json格式
 参数示例：
 
-> ```
-{
-"uid":"user1",
-"imgName":"img-test",
-"imgId":"imgId-1",
-"problem":{
-	"8":{
-        "name":"第8题",
-        "type":"选择题",
-        "problem":"1+1=？",
-        "answer":"A.1&B.2&C.3&D.4@A",
-        "createTime":"2018-7-6 16:34",
-        "author":"slq"
-    },
-    "9":{
-        "name":"第9题",
-        "type":"选择题",
-        "problem":"1+1=？",
-        "answer":"A.1&B.2&C.3&D.4@A",
-        "createTime":"2018-7-6 16:34",
-        "author":"slq"
-    }
-}}
-```
+	{
+	"uid":"user1",
+	"imgName":"img-test",
+	"imgId":"imgId-1",
+	"problem":{
+		"8":{
+		"name":"第8题",
+		"type":"选择题",
+		"problem":"1+1=？",
+		"answer":"A.1&B.2&C.3&D.4@A",
+		"createTime":"2018-7-6 16:34",
+		"author":"slq"
+	    },
+	    "9":{
+		"name":"第9题",
+		"type":"选择题",
+		"problem":"1+1=？",
+		"answer":"A.1&B.2&C.3&D.4@A",
+		"createTime":"2018-7-6 16:34",
+		"author":"slq"
+	    }
+	}}
 
 返回值：string（无错误返回：“BuildImage”）
 
@@ -53,96 +51,96 @@ type:GET
 返回值：json
 返回值示例：此版返回信息较多，后期可以根据需求返回数据
 
-> ```
-[
-  {
-    "Id": "725a6ee9a490cbdf02249ee0fbdd92bc2c3c29fa04b59c8631419d195eda97d2",
-    "Names": [
-      "/tt4"
-    ],
-    "Image": "alpine",
-    "ImageID": "sha256:11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab",
-    "Command": "/bin/sh",
-    "Created": 1532941360,
-    "Ports": [
-      {
-        "PrivatePort": 8080,
-        "Type": "tcp"
-      },
-      {
-        "IP": "0.0.0.0",
-        "PrivatePort": 3306,
-        "PublicPort": 3306,
-        "Type": "tcp"
-      }
-    ],
-    "Labels": {},
-    "State": "running",
-    "Status": "Up About an hour",
-    "HostConfig": {
-      "NetworkMode": "default"
-    },
-    "NetworkSettings": {
-      "Networks": {
-        "bridge": {
-          "IPAMConfig": null,
-          "Links": null,
-          "Aliases": null,
-          "NetworkID": "e0bccd963bea8cbf9f8efe7a61dbd7d23e896820ef29e704389d6065f061ad21",
-          "EndpointID": "9442c0753b68040f204bd85f51bdff0aa49e32de10169eae10b2b6e7b977ade4",
-          "Gateway": "172.17.0.1",
-          "IPAddress": "172.17.0.3",
-          "IPPrefixLen": 16,
-          "IPv6Gateway": "",
-          "GlobalIPv6Address": "",
-          "GlobalIPv6PrefixLen": 0,
-          "MacAddress": "02:42:ac:11:00:03",
-          "DriverOpts": null
-        }
-      }
-    },
-    "Mounts": []
-  },
-  {
-    "Id": "c1e48c1082d2b68f3f4a93a65d7658dc4ef40cebff93589dafabc6282ef46b64",
-    "Names": [
-      "/tt3"
-    ],
-    "Image": "alpine",
-    "ImageID": "sha256:11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab",
-    "Command": "/bin/sh",
-    "Created": 1532940431,
-    "Ports": [],
-    "Labels": {},
-    "State": "running",
-    "Status": "Up About an hour",
-    "HostConfig": {
-      "NetworkMode": "default"
-    },
-    "NetworkSettings": {
-      "Networks": {
-        "bridge": {
-          "IPAMConfig": null,
-          "Links": null,
-          "Aliases": null,
-          "NetworkID": "e0bccd963bea8cbf9f8efe7a61dbd7d23e896820ef29e704389d6065f061ad21",
-          "EndpointID": "8b581897bd6408f3836e1f60bc5bdfefe66695c0e2fd8ee127815f279a82f0d8",
-          "Gateway": "172.17.0.1",
-          "IPAddress": "172.17.0.2",
-          "IPPrefixLen": 16,
-          "IPv6Gateway": "",
-          "GlobalIPv6Address": "",
-          "GlobalIPv6PrefixLen": 0,
-          "MacAddress": "02:42:ac:11:00:02",
-          "DriverOpts": null
-        }
-      }
-    },
-    "Mounts": []
-  }
- }
-]
-```
+
+	[
+	  {
+	    "Id": "725a6ee9a490cbdf02249ee0fbdd92bc2c3c29fa04b59c8631419d195eda97d2",
+	    "Names": [
+	      "/tt4"
+	    ],
+	    "Image": "alpine",
+	    "ImageID": "sha256:11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab",
+	    "Command": "/bin/sh",
+	    "Created": 1532941360,
+	    "Ports": [
+	      {
+		"PrivatePort": 8080,
+		"Type": "tcp"
+	      },
+	      {
+		"IP": "0.0.0.0",
+		"PrivatePort": 3306,
+		"PublicPort": 3306,
+		"Type": "tcp"
+	      }
+	    ],
+	    "Labels": {},
+	    "State": "running",
+	    "Status": "Up About an hour",
+	    "HostConfig": {
+	      "NetworkMode": "default"
+	    },
+	    "NetworkSettings": {
+	      "Networks": {
+		"bridge": {
+		  "IPAMConfig": null,
+		  "Links": null,
+		  "Aliases": null,
+		  "NetworkID": "e0bccd963bea8cbf9f8efe7a61dbd7d23e896820ef29e704389d6065f061ad21",
+		  "EndpointID": "9442c0753b68040f204bd85f51bdff0aa49e32de10169eae10b2b6e7b977ade4",
+		  "Gateway": "172.17.0.1",
+		  "IPAddress": "172.17.0.3",
+		  "IPPrefixLen": 16,
+		  "IPv6Gateway": "",
+		  "GlobalIPv6Address": "",
+		  "GlobalIPv6PrefixLen": 0,
+		  "MacAddress": "02:42:ac:11:00:03",
+		  "DriverOpts": null
+		}
+	      }
+	    },
+	    "Mounts": []
+	  },
+	  {
+	    "Id": "c1e48c1082d2b68f3f4a93a65d7658dc4ef40cebff93589dafabc6282ef46b64",
+	    "Names": [
+	      "/tt3"
+	    ],
+	    "Image": "alpine",
+	    "ImageID": "sha256:11cd0b38bc3ceb958ffb2f9bd70be3fb317ce7d255c8a4c3f4af30e298aa1aab",
+	    "Command": "/bin/sh",
+	    "Created": 1532940431,
+	    "Ports": [],
+	    "Labels": {},
+	    "State": "running",
+	    "Status": "Up About an hour",
+	    "HostConfig": {
+	      "NetworkMode": "default"
+	    },
+	    "NetworkSettings": {
+	      "Networks": {
+		"bridge": {
+		  "IPAMConfig": null,
+		  "Links": null,
+		  "Aliases": null,
+		  "NetworkID": "e0bccd963bea8cbf9f8efe7a61dbd7d23e896820ef29e704389d6065f061ad21",
+		  "EndpointID": "8b581897bd6408f3836e1f60bc5bdfefe66695c0e2fd8ee127815f279a82f0d8",
+		  "Gateway": "172.17.0.1",
+		  "IPAddress": "172.17.0.2",
+		  "IPPrefixLen": 16,
+		  "IPv6Gateway": "",
+		  "GlobalIPv6Address": "",
+		  "GlobalIPv6PrefixLen": 0,
+		  "MacAddress": "02:42:ac:11:00:02",
+		  "DriverOpts": null
+		}
+	      }
+	    },
+	    "Mounts": []
+	  }
+	 }
+	]
+
 
 #### api: /ContainerOne
 type:GET
