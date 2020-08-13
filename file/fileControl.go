@@ -3,7 +3,7 @@ package file
 import (
 	"fmt"
 	"os"
-	"project/go-docker-api/cmd"
+	"go-docker-api/cmd"
 )
 /**
 *  	临时的Dockerfile文件方法

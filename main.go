@@ -1,16 +1,14 @@
 package main
 
 import (
-	"github.com/henrylee2cn/faygo"
-	"project/go-docker-api/db"
 	"encoding/json"
-	_ "github.com/denisenkom/go-mssqldb"
 	"fmt"
+	_ "github.com/denisenkom/go-mssqldb"
+	"github.com/henrylee2cn/faygo"
+	"go-docker-api/db"
 	//"go-resetfulDocker/docker"
-	"project/go-docker-api/docker"
+	"go-docker-api/docker"
 )
-
-
 
 //GET
 //type testGet struct {
@@ -40,7 +38,6 @@ import (
 //type testPage struct{}
 //type test struct{}
 
-
 ////LevelDb api
 //POST
 //type SaveProblems struct {
@@ -49,24 +46,24 @@ import (
 
 ////docker api
 //Image List
-type ImageList struct {}
+type ImageList struct{}
 
 //Get
 // Image one
-type ImageOne struct{
-	ImageId string  `param:"<in:query> <required>"`
+type ImageOne struct {
+	ImageId string `param:"<in:query> <required>"`
 }
 
 //Get
 //build image
-type BuildImage struct{
-	Data map[string]interface{} 	`param:"<in:body>"`
+type BuildImage struct {
+	Data map[string]interface{} `param:"<in:body>"`
 }
 
 //Get
 //build image info
-type BII struct{
-	ImgID	string	`param:"<in:query> <required>"`
+type BII struct {
+	ImgID string `param:"<in:query> <required>"`
 }
 
 //Get
@@ -75,8 +72,8 @@ type ImageSave struct{}
 
 //Get
 //build container
-type CreateContainer struct{
-	Name  string `param:"<in:query> <required>"`
+type CreateContainer struct {
+	Name string `param:"<in:query> <required>"`
 }
 
 //Get
@@ -85,23 +82,19 @@ type CCI struct{}
 
 //Get
 //run container
-type StartContainer struct{
-	CID		string `param:"<in:query> <required>"`
+type StartContainer struct {
+	CID string `param:"<in:query> <required>"`
 }
 
 //Get
 //container one
-type ContainerOne struct{
+type ContainerOne struct {
 	Id string `param:"<in:query> <required>"`
 }
 
 //Get
 //container list
 type ContainerList struct{}
-
-
-
-
 
 //GET实现
 //func (i *testGet) Serve(ctx *faygo.Context) error {
@@ -116,48 +109,48 @@ type ContainerList struct{}
 //POST实现
 //func(p *SaveProblems) Serve(ctx *faygo.Context) error{
 
-	//将数据存储进levelDB
-	//对收到的数据进行解读
-	//for problemId, problem := range p.Data{
-	//	value, err1 :=problem.(map[string]interface{})
-	//	if !err1 {
-	//		return ctx.String(200, "数据格式有误")
-	//	}
-	//	mjson,_ :=json.Marshal(value)
-	//	mString :=string(mjson)
-	//
-	//	fmt.Println(p.Data)
-	//	result, err := db.Save("src/user1/dockerSrc/DB", problemId, mString)
-	//
-	//	if err != nil{
-	//		return ctx.String(200,  problemId + result + "：" + err.Error())
-	//	}
-	//}
+//将数据存储进levelDB
+//对收到的数据进行解读
+//for problemId, problem := range p.Data{
+//	value, err1 :=problem.(map[string]interface{})
+//	if !err1 {
+//		return ctx.String(200, "数据格式有误")
+//	}
+//	mjson,_ :=json.Marshal(value)
+//	mString :=string(mjson)
+//
+//	fmt.Println(p.Data)
+//	result, err := db.Save("src/user1/dockerSrc/DB", problemId, mString)
+//
+//	if err != nil{
+//		return ctx.String(200,  problemId + result + "：" + err.Error())
+//	}
+//}
 
-	//
-	//str, err := docker.CreateImage()
+//
+//str, err := docker.CreateImage()
 
-	//编写Dockerfile
-	//file.CreateDockerFile("src/user1/dockerSrc/Dockerfile")
-	//fmt.Println("Dockerfile end")
-	//
-	////生成tar包
-	//file.CreateTarfile("src/user1/srcTar/temp.tar", "src/user1/dockerSrc")
-	//fmt.Println("tar end")
-	//
-	////imagesbuild
-	//docker.BuildImage("ttt:ttt", "src/user1/srcTar/temp.tar")
-	//fmt.Println("imagesbuild end")
-	//
-	////将镜像保存成tar文件
-	////docker.SaveImage(name, path)
-	//err := docker.SaveImage("ttt:ttt", "src/imageTar/temp.tar")
-	//if err != nil{
-	//	return ctx.String(200, err.Error())
-	//}
-	//fmt.Println("SaveImage end")
+//编写Dockerfile
+//file.CreateDockerFile("src/user1/dockerSrc/Dockerfile")
+//fmt.Println("Dockerfile end")
+//
+////生成tar包
+//file.CreateTarfile("src/user1/srcTar/temp.tar", "src/user1/dockerSrc")
+//fmt.Println("tar end")
+//
+////imagesbuild
+//docker.BuildImage("ttt:ttt", "src/user1/srcTar/temp.tar")
+//fmt.Println("imagesbuild end")
+//
+////将镜像保存成tar文件
+////docker.SaveImage(name, path)
+//err := docker.SaveImage("ttt:ttt", "src/imageTar/temp.tar")
+//if err != nil{
+//	return ctx.String(200, err.Error())
+//}
+//fmt.Println("SaveImage end")
 
-	//返回可供下载dockeriamge.tar的地址
+//返回可供下载dockeriamge.tar的地址
 //	return ctx.String(200, "localhost:8080/imageTar/temp.tar")
 //}
 //PUT实现
@@ -214,16 +207,14 @@ type ContainerList struct{}
 //	return ctx.String(200, "test")
 //}
 
-
-
 ////api Serve
 
 //ImageList 7
-func (IL *ImageList) Serve(ctx *faygo.Context)error  {
+func (IL *ImageList) Serve(ctx *faygo.Context) error {
 
 	//get all Image info
 	imageList, err := docker.ImageList()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	//fmt.Println(imageList)
@@ -234,12 +225,12 @@ func (IL *ImageList) Serve(ctx *faygo.Context)error  {
 }
 
 //Image One 7
-func (BI *ImageOne) Serve(ctx *faygo.Context) error{
+func (BI *ImageOne) Serve(ctx *faygo.Context) error {
 
 	//id := "sha256:c82521676580c4850bb8f0d72e47390a50d60c8ffe44d623ce57be521bca9869"
 	imageOne, err := docker.ImageOne(BI.ImageId)
 	//return ctx.String(200, "ImageOne")
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	return ctx.JSON(200, imageOne)
@@ -247,7 +238,7 @@ func (BI *ImageOne) Serve(ctx *faygo.Context) error{
 
 //Post
 //2 BuildImage 7   next =>>file path
-func (BI *BuildImage) Serve(ctx *faygo.Context) error{
+func (BI *BuildImage) Serve(ctx *faygo.Context) error {
 	id := BI.Data["uid"]
 	imgName := BI.Data["imgName"]
 	imgId := BI.Data["imgId"]
@@ -266,27 +257,25 @@ func (BI *BuildImage) Serve(ctx *faygo.Context) error{
 		return ctx.String(200, "uid数据格式有误")
 	}
 
-
-	fmt.Println(imageName,imageId)
+	fmt.Println(imageName, imageId)
 	problemData, err := Data.(map[string]interface{})
-	if !err{
+	if !err {
 		return ctx.String(200, "数据格式有误")
 	}
-	for problemId, problem := range problemData{
-		value, err1 :=problem.(map[string]interface{})
+	for problemId, problem := range problemData {
+		value, err1 := problem.(map[string]interface{})
 		if !err1 {
 			return ctx.String(200, "数据格式有误")
 		}
-		mjson,_ :=json.Marshal(value)
-		mString :=string(mjson)
+		mjson, _ := json.Marshal(value)
+		mString := string(mjson)
 
 		//fmt.Println(BI.Data)
 
+		result, err := db.Save(`src/`+uid+`/dockerSrc/DB`, problemId, mString)
 
-		result, err := db.Save(`src/` + uid +`/dockerSrc/DB`, problemId, mString)
-
-		if err != nil{
-			return ctx.String(200,  problemId + result + err.Error())
+		if err != nil {
+			return ctx.String(200, problemId+result+err.Error())
 		}
 	}
 	go docker.CreateImage(uid, imageName, imageId)
@@ -294,45 +283,45 @@ func (BI *BuildImage) Serve(ctx *faygo.Context) error{
 }
 
 //3 BII 7 notreal
-func (BI *BII) Serve(ctx *faygo.Context) error{
-	re := db.Get("src/statusDB",BI.ImgID)
+func (BI *BII) Serve(ctx *faygo.Context) error {
+	re := db.Get("src/statusDB", BI.ImgID)
 	fmt.Println(re)
 	//return ctx.JSON(200, r.Json, true)
 	return ctx.String(200, re)
 }
 
 //4 ImageSave   no
-func (BI *ImageSave) Serve(ctx *faygo.Context) error{
+func (BI *ImageSave) Serve(ctx *faygo.Context) error {
 
 	//go docker.CreateImage("user1", "ttt2", "ttt3")
 	return ctx.String(200, "ImageSave")
 }
 
 //5 CreateContainer 7
-func (BI *CreateContainer) Serve(ctx *faygo.Context) error{
+func (BI *CreateContainer) Serve(ctx *faygo.Context) error {
 	docker.CreateContainer(BI.Name)
 	return ctx.String(200, "buildContainer")
 }
 
 //6 CCI
-func (BI *CCI) Serve(ctx *faygo.Context) error{
+func (BI *CCI) Serve(ctx *faygo.Context) error {
 	return ctx.String(200, "CCI")
 }
 
 //7 StartContainer
-func (BI *StartContainer) Serve(ctx *faygo.Context) error{
+func (BI *StartContainer) Serve(ctx *faygo.Context) error {
 	err := docker.StartContainer(BI.CID)
-	if err != nil{
+	if err != nil {
 		return ctx.String(200, err.Error())
 	}
 	return ctx.String(200, "OK")
 }
 
 //8 Containerone 7
-func (BI *ContainerOne) Serve(ctx *faygo.Context) error{
+func (BI *ContainerOne) Serve(ctx *faygo.Context) error {
 	//id := "63b763ba1531ab210daa275242bf839ddd9517d3650a92b1321dbec4a6148fd5"
 	COne, err := docker.ContainerOne(BI.Id)
-	if err != nil{
+	if err != nil {
 		fmt.Println(err)
 	}
 
@@ -340,36 +329,36 @@ func (BI *ContainerOne) Serve(ctx *faygo.Context) error{
 }
 
 //9 ContainerList 7  == docker ps -a
-func (BI *ContainerList) Serve(ctx *faygo.Context) error{
+func (BI *ContainerList) Serve(ctx *faygo.Context) error {
 	CList, err := docker.ContainerList()
-	if err != nil{
+	if err != nil {
 		panic(err)
 	}
 	fmt.Println(CList)
 	return ctx.JSON(200, CList)
 }
 
-
 ////Doc
 //Image One
-func (IO *ImageOne) Doc()faygo.Doc{
+func (IO *ImageOne) Doc() faygo.Doc {
 	return faygo.Doc{
-		Note:"ImageId for test ",
-		Return:"sha256:c82521676580c4850bb8f0d72e47390a50d60c8ffe44d623ce57be521bca9869",
+		Note:   "ImageId for test ",
+		Return: "sha256:c82521676580c4850bb8f0d72e47390a50d60c8ffe44d623ce57be521bca9869",
 	}
 }
+
 //Container one
-func (IO *ContainerOne) Doc() faygo.Doc{
+func (IO *ContainerOne) Doc() faygo.Doc {
 	return faygo.Doc{
-		Note:"Container ID",
-		Return:"63b763ba1531ab210daa275242bf839ddd9517d3650a92b1321dbec4a6148fd5",
+		Note:   "Container ID",
+		Return: "63b763ba1531ab210daa275242bf839ddd9517d3650a92b1321dbec4a6148fd5",
 	}
 }
 
 //cpu 100%
-func tet(){
+func tet() {
 	for {
-		tt :=0
+		tt := 0
 		tt++
 	}
 }
@@ -382,16 +371,14 @@ func main() {
 
 	app := faygo.New("myapp", "0.1")
 
-
-
 	// Register the route in a chain style
 	////static file route
 	app.Static("src", "src")
 	app.Static("Plugin", "view/Plugin")
 
 	//api route
-	app.GET("/ImageList", new(ImageList))   //
-	app.GET("/ImageOne", new(ImageOne))     //
+	app.GET("/ImageList", new(ImageList)) //
+	app.GET("/ImageOne", new(ImageOne))   //
 	app.POST("/BuildImage", new(BuildImage))
 	app.GET("/BII", new(BII))
 	app.GET("/ImageSave", new(ImageSave))
@@ -400,7 +387,6 @@ func main() {
 	app.GET("/ContainerStart", new(StartContainer))
 	app.GET("/ContainerOne", new(ContainerOne))
 	app.GET("/ContainerList", new(ContainerList))
-
 
 	// Start the service
 	faygo.Run()
